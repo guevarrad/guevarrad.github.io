@@ -2,16 +2,44 @@ body {
     font-family: Arial, sans-serif;
     max-width: 700px;
     margin: 40px auto;
-    background: rgb(238, 212, 238); /* Set background color to purple */
-    color: rgb(15, 15, 15); /* Set font color to green */
+    background: #f5e1a4; /* Light brown for burger bun */
+    color: #4b2e2e; /* Dark brown for text */
 }
+
 h1 {
     font-size: 2.5rem;
+    color: #d32f2f; /* Red for tomato */
+    text-align: center;
 }
+
 a {
-    color: rgb(6, 133, 245);
+    color: #fbc02d; /* Yellow for cheese */
+    text-decoration: none;
 }
+
+a:hover {
+    text-decoration: underline;
+}
+
 .bio {
-    background: rgb(178, 228, 178); /* Same green as the font color */
+    background: #81c784; /* Green for lettuce */
     padding: 20px;
+    border: 2px solid #4caf50; /* Darker green border */
+    border-radius: 10px;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+li {
+    margin: 10px 0;
+    color: #d32f2f; /* Red for tomato */
+    background: #fbc02d; /* Yellow for cheese */
+    padding: 10px;
+    border: 2px solid #4b2e2e; /* Dark brown border */
+    border-radius: 5px; /* Rounded corners for the box */
+    list-style-type: none; /* Remove default bullet points */
+    text-align: center; /* Center the text inside the box */
 }
