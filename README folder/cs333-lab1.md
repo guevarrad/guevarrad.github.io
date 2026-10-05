@@ -11,6 +11,7 @@ You'll submit links to both in Moodle (see the last step).
 
 1. Do you have your simple apache website already set up? 
 2. What is your URL? Provide it here — and practice writing it as a proper **Markdown link** in this file, e.g. `[my site](https://lampforall.cis251296.projects.jetstream-cloud.org/students/yourname)`, not just pasted plain text. (Good Markdown practice for your README.)
+   [Live form](https://lampforall.cis251296.projects.jetstream-cloud.org/students/dennis/form.html)
 3. As always, you can do the minimum, or you can go further than the assignment and embellish your work- highly encouraged.
 4. Put these two html files included in this lab1 repo in your local site. View them with live preview, and make sure they are visible locally.
 5. Link these two files to your index.html page, both ways so I can go to all pages from each page via hyperlinks.
