@@ -43,7 +43,9 @@ You'll submit links to both in Moodle (see the last step).
 13. Describe what a static HTML site is, the limitations of this type of site
 
     **Answer:** A static HTML site is a simple website made of pages that mostly stay the same until someone edits the files. Its main limitation is that it cannot do much by itself with user input. For example, a static page can show a form, but it cannot save the form information, log users in, or automatically display changing data unless you add JavaScript or a backend/server program.
-14. What kind of non-static site would we need to be able to store the form information? Give an example of a configuration that will enable a form to accept data and store it persistently.
+14. What kind of non-static site would we need to be able to store the form information? Give an example of a configuration that will enable a form to accept data and store it persistently.\
+
+    **Answer:** You would need a dynamic website with a backend and a database. For example, you could use: HTML form for the page, PHP, Python, or Node.js to receive the form data, MySQL or SQLite to save the dataSo when the user clicks Submit, the backend takes the name, email, and message and stores them in the database. That way, the information is saved even after the page is closed.
 
 15. Push this repo — the lab **files** and this **README.md** (with your answers filled in) — to **your own GitHub repo**.
 16. Submit in Moodle two links: (1) your GitHub repo, and (2) your live site showing the working form. Labs are submitted in Moodle every week — that is how I receive your work.
