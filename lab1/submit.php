@@ -21,12 +21,12 @@ $message = isset($_GET['message']) && is_string($_GET['message']) ? $_GET['messa
             margin: 0 auto;
         }
     </style>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
     <nav>
-        <a href="index.html">Home</a>
+        <a href="../index.html">Home</a>
         <a href="form.html">Contact form</a>
         <a href="submit.php">Form submission</a>
     </nav>
