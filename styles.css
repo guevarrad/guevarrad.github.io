@@ -44,11 +44,62 @@ li {
     text-align: center; /* Center the text inside the box */
 }
 
-nav {
+.site-nav {
     display: flex;
     justify-content: center;
-    gap: 24px;
     margin: 24px 0;
+}
+
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown summary {
+    padding: 10px 16px;
+    background: #fff8e1;
+    border: 2px solid #d6a84f;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
+}
+
+.nav-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.nav-dropdown summary::after {
+    content: " ▾";
+}
+
+.nav-dropdown[open] summary {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.nav-menu {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    display: grid;
+    min-width: 190px;
+    padding: 8px;
+    background: #fff8e1;
+    border: 2px solid #d6a84f;
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgb(75 46 46 / 15%);
+}
+
+.nav-menu a {
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus-visible {
+    background: #f5e1a4;
 }
 
 .labs {
