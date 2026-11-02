@@ -150,3 +150,17 @@ li {
     margin-top: 8px;
     font-size: 0.9rem;
 }
+
+.qr-page {
+    max-width: 32rem;
+    margin: 3rem auto;
+    padding: 1.5rem;
+    background: #fff8e1;
+    border: 2px solid #d6a84f;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.qr-page .qr-code {
+    width: min(100%, 20rem);
+}
