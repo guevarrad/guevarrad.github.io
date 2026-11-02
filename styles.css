@@ -129,3 +129,24 @@ li {
     margin-bottom: 0;
     line-height: 1.5;
 }
+
+.qr-figure {
+    margin: 16px 0 0;
+    text-align: center;
+}
+
+.qr-code {
+    display: block;
+    width: min(100%, 12rem);
+    height: auto;
+    margin: 0 auto;
+    padding: 8px;
+    background: white;
+    border: 1px solid #d6a84f;
+    border-radius: 6px;
+}
+
+.qr-figure figcaption {
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
