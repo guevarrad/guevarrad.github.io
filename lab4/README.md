@@ -264,7 +264,7 @@ console.log(picture);
 ```
 
 **Done:** made a QR code for **your landing page** on `lampforall` and saved the PNG in this repo.
-[lampforall.cis251296.projects.jetstream-cloud.org.png](./lampforall.cis251296.projects.jetstream-cloud.org.png)
+[landing-page-qr.png](./landing-page-qr.png)
 
 This program can't run on your `lampforall` website. (you answered why this is the case above)
 
