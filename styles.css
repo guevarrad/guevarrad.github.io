@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+    background: #f5e1a4; /* Light brown for burger bun */
+    color: #4b2e2e; /* Dark brown for text */
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #d32f2f; /* Red for tomato */
+    text-align: center;
+}
+
+a {
+    color: #005a70;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.bio {
+    background: #81c784; /* Green for lettuce */
+    padding: 20px;
+    border: 2px solid #4caf50; /* Darker green border */
+    border-radius: 10px;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+li {
+    margin: 10px 0;
+    color: #3b2415;
+    background: #fbc02d; /* Yellow for cheese */
+    padding: 10px;
+    border: 2px solid #4b2e2e; /* Dark brown border */
+    border-radius: 5px; /* Rounded corners for the box */
+    list-style-type: none; /* Remove default bullet points */
+    text-align: center; /* Center the text inside the box */
+}
+
+.site-nav {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown summary {
+    padding: 10px 16px;
+    background: #fff8e1;
+    border: 2px solid #d6a84f;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
+}
+
+.nav-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.nav-dropdown summary::after {
+    content: " ▾";
+}
+
+.nav-dropdown[open] summary {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.nav-menu {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    display: grid;
+    min-width: 190px;
+    padding: 8px;
+    background: #fff8e1;
+    border: 2px solid #d6a84f;
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgb(75 46 46 / 15%);
+}
+
+.nav-menu a {
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus-visible {
+    background: #f5e1a4;
+}
+
+.labs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 32px 0;
+}
+
+.labs h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+.lab-card {
+    padding: 16px;
+    background: #fff8e1;
+    border: 2px solid #d6a84f;
+    border-radius: 10px;
+}
+
+.lab-card h3 {
+    margin-top: 0;
+}
+
+.lab-card p {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
