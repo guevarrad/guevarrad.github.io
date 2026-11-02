@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Event Handlers</h2>
+  <button id="btn">Click me</button>
+  <button id="btn2">Another button</button>
+  <p id="demo"></p>
+  <script>
+    let count = 0;
+    document.querySelectorAll("button").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        count++;
+        document.getElementById("demo").textContent =
+          `You clicked "${event.currentTarget.textContent}" ${count} times`;
+      });
+    });
+    // Try changing "click" to "mouseover".
+  </script>
+</body>
+</html>
