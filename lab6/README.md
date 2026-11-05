@@ -49,6 +49,10 @@ show collections
 
 **Question 1:** what is `_id` for? What would MongoDB do if you left it out? (Try it: insert a third product with no `_id`, then look at it in step 3.)
 
+**Answer:** `_id` uniquely identifies each document in a MongoDB collection. No two documents in the same collection can have the same `_id`.
+
+If you leave it out, MongoDB automatically creates an `_id` with an **ObjectId** value.
+
 ## 3. Read
 
 ```js
@@ -60,6 +64,15 @@ db.products.find({}, { name: 1, _id: 0 })
 
 **Question 2:** what does `$gt` mean? What does the second `{ name: 1, _id: 0 }` in the last command do? (It's called a **projection**.)
 
+**Answer:** `$gt` means **greater than**. `{ price: { $gt: 1 } }` finds products whose price is greater than 1.
+
+The projection `{ name: 1, _id: 0 }` controls which fields appear:
+
+- `name: 1` includes the product's name.
+- `_id: 0` hides its ID.
+
+So the last command returns every product with **only its name** shown.
+
 ## 4. Update
 
 The Pen has no `stock`. Give it one:
@@ -70,6 +83,8 @@ db.products.find({ _id: 1 })
 ```
 
 **Question 3:** `stock` didn't exist on the Pen. What did `$set` do?
+
+**Answer:** `$set` added the `stock` field to the Pen and assigned it the value `35`. If `stock` already existed, `$set` would update its value.
 
 ## 5. Delete
 
@@ -105,10 +120,136 @@ db.products.find({ _id: 3 })
 
 **Question 4:** in a SQL database, where would the reviews go? Why is keeping them inside the product handy here?
 
+**Answer:** In a SQL database, reviews would usually go in a separate **reviews table**, linked to the products table by a product ID. Keeping reviews inside the product in MongoDB is handy because you can retrieve the product and its reviews together without joining separate tables.
+
 Copy everything from your terminal (from `mongosh` to the last command) and paste it here, in a code block:
 
 ```
-paste your terminal here
+shopDB> db.products.insertOne({ _id: 1, name: "Pen", price: 1.20 })
+{ acknowledged: true, insertedId: 1 }
+shopDB> db.products.insertOne({ _id: 2, name: "Pencil", price: 0.80, stock: 12 })
+{ acknowledged: true, insertedId: 2 }
+shopDB> show collections
+products
+shopDB>
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+shopDB> db.products.find()
+[
+  { _id: 1, name: 'Pen', price: 1.2 },
+  { _id: 2, name: 'Pencil', price: 0.8, stock: 12 }
+]
+shopDB> db.products.insertOne({ name: "Eraser", price: 0.50 })
+{
+  acknowledged: true,
+  insertedId: ObjectId('6aebcf0d1120f5f721bea902')
+}
+shopDB> db.products.find({ name: "Eraser" })
+[
+  {
+    _id: ObjectId('6aebcf0d1120f5f721bea902'),
+    name: 'Eraser',
+    price: 0.5
+  }
+]
+shopDB> db.products.find({ name: "Eraser" })
+[
+  {
+    _id: ObjectId('6aebcf0d1120f5f721bea902'),
+    name: 'Eraser',
+    price: 0.5
+  }
+]
+shopDB> db.products.find({ name: "Pencil" })
+[ { _id: 2, name: 'Pencil', price: 0.8, stock: 12 } ]
+shopDB> db.products.find({ price: { $gt: 1 } })
+[ { _id: 1, name: 'Pen', price: 1.2 } ]
+shopDB> db.products.find({}, { name: 1, _id: 0 })
+[ { name: 'Pen' }, { name: 'Pencil' }, { name: 'Eraser' } ]
+shopDB> db.products.updateOne({ _id: 1 }, { $set: { stock: 35 } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+shopDB> db.products.find({ _id: 1 })
+[ { _id: 1, name: 'Pen', price: 1.2, stock: 35 } ]
+shopDB> db.products.deleteOne({ _id: 2 })
+{ acknowledged: true, deletedCount: 1 }
+shopDB> db.products.find()
+[
+  { _id: 1, name: 'Pen', price: 1.2, stock: 35 },
+  {
+    _id: ObjectId('6aebcf0d1120f5f721bea902'),
+    name: 'Eraser',
+    price: 0.5
+  }
+]
+shopDB> db.products.insertOne({ _id: 2, name: "Pencil", price: 0.80, stock: 12 })
+{ acknowledged: true, insertedId: 2 }
+shopDB> db.products.find()
+[
+  { _id: 1, name: 'Pen', price: 1.2, stock: 35 },
+  {
+    _id: ObjectId('6aebcf0d1120f5f721bea902'),
+    name: 'Eraser',
+    price: 0.5
+  },
+  { _id: 2, name: 'Pencil', price: 0.8, stock: 12 }
+]
+shopDB> db.products.insertOne({
+|   _id: 3,
+|   name: "Eraser",
+|   price: 1.30,
+|   stock: 43,
+|   reviews: [
+|     { authorName: "Jim", rating: 4, review: "Cool Eraser" }
+|   ]
+| })
+{ acknowledged: true, insertedId: 3 }
+shopDB> db.products.updateOne(
+|   { name: "Eraser" },
+|   {
+|     $push: {
+|       reviews: {
+|         authorName: "Dennis",
+|         rating: 5,
+|         review: "Erases cleanly without tearing the paper."
+|       }
+|     }
+|   }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+shopDB> db.products.find({ name: "Eraser" })
+[
+  {
+    _id: ObjectId('6aebcf0d1120f5f721bea902'),
+    name: 'Eraser',
+    price: 0.5,
+    reviews: [
+      {
+        authorName: 'Dennis',
+        rating: 5,
+        review: 'Erases cleanly without tearing the paper.'
+      }
+    ]
+  },
+  {
+    _id: 3,
+    name: 'Eraser',
+    price: 1.3,
+    stock: 43,
+    reviews: [ { authorName: 'Jim', rating: 4, review: 'Cool Eraser' } ]
+  }
+]
+shopDB>
 ```
 
 Type `exit` to leave mongosh.
@@ -181,6 +322,8 @@ Now run it a **second** time.
 
 **Question 5:** what changed the second time? Why?
 
+**Answer:** The second run saves another Apple, so the list shows two Apples. Each call to `fruit.save()` creates a new document with its own `_id`; this code does not check for an existing Apple or prevent duplicates.
+
 ## 9. Look at it in mongosh
 
 In your **second** terminal:
@@ -196,6 +339,8 @@ db.fruits.find()
 ```
 
 **Question 6:** your model is called `Fruit`. What is the collection called? Are your fruits from Lab 5 Part 3 in there too? Why?
+
+**Answer:** The collection is called `fruits`—Mongoose makes the model name `Fruit` lowercase and plural. Yes, the fruits from Lab 5 Part 3 are there too because both labs use the `fruits` collection in the `fruitsDB` database.
 
 ## 10. Many at once, and a wrong type
 
@@ -219,6 +364,8 @@ await mango.save();
 ```
 
 **Question 7:** what error do you get? How does the schema protect your data? (Then delete the Mango lines.)
+
+**Answer:** Mongoose reports a validation error with a `CastError` for `rating` because it cannot convert `"ten"` to a number. The schema requires `rating` to be a number, so the invalid value is rejected instead of being saved.
 
 Commit: `Part 2: Mongoose`
 
