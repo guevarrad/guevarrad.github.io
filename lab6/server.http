@@ -1,5 +1,5 @@
 # Put your server's address on the next line (the same address you ssh to), then send each request.
-@base = http://your-server-address/api
+@base = https://dennis.cis251296.projects.jetstream-cloud.org/api
 
 ### 1. A random joke
 GET {{base}}/random

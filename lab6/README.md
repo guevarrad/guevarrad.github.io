@@ -447,6 +447,8 @@ Now go back to the terminal running `node index.js` and press **Ctrl+C**. Send t
 
 **Question 8:** what does `curl` say now? Why? What would happen to your API if you closed that terminal, or your laptop?
 
+**Answer:** `curl` reports that it failed to connect to `localhost:3000` because pressing **Ctrl+C** stopped the Node app, so nothing is listening on that port. If you closed the terminal while running the app, it would stop too. If you shut down your laptop, the API would stop and would not be available until you started it again.
+
 You can close the third terminal now.
 
 ---
@@ -475,6 +477,8 @@ curl http://localhost:3000/random
 
 **Question 9:** what is the `status` of `jokes`? What does the `↺` column count?
 
+**Answer:** The `status` should be `online` when the API is running. The `↺` column counts how many times PM2 has restarted the app.
+
 It works, and no terminal is busy running it.
 
 ## 16. Logs
@@ -484,6 +488,8 @@ pm2 logs jokes --lines 20
 ```
 
 **Question 10:** what's in the log? Which line of `index.js` printed it? (Press **Ctrl+C** to stop watching the log. That only stops the log, not your API.)
+
+**Answer:** The log includes `Listening on http://localhost:3000`, printed by the `console.log` inside `app.listen` on line 87 of `index.js`.
 
 Other pm2 commands you'll use:
 
@@ -526,7 +532,12 @@ It should say `active (running)`. Open `http://your-server-address` in your **la
 
 **Question 11:** what page do you see? Where on the server does that page live?
 
+**Answer:** I see an nginx `404 Not Found` page (`nginx/1.24.0 (Ubuntu)`). nginx is reachable, but it doesn't find a page for `/`. The website files are served from the configured document root, usually `/var/www/html`; this 404 suggests the home page is missing there or nginx is configured to use a different root.
+
+
 **TODO:** also try `http://your-server-address:3000/random` in your browser. **Question 12:** what happens? (Either answer is fine; just say what you see.)
+
+**Answer:** The browser displays a joke as raw JSON, for example `{"id":9,"jokeText":"Why did the scarecrow win an award? He was outstanding in his field.","jokeType":"Puns"}`. This shows the API is responding directly on port 3000.
 
 ## 19. Send /api/ to your API
 
@@ -567,6 +578,8 @@ Open `http://your-server-address/api/random` in your laptop's browser. 🎉 Your
 
 **Question 13:** the browser asked for `/api/random`, but your Express route is `/random`. Which part of the nginx setting takes `/api` off? (Hint: try it without the last `/` in `proxy_pass`, test, reload, and see what happens. Put it back after.)
 
+**Answer:** The trailing `/` in `proxy_pass http://localhost:3000/;` makes nginx replace the matched `/api/` prefix with `/`, so Express receives `/random`. Without that trailing slash, nginx forwards the original `/api/random` path.
+
 ---
 
 # Part 6: Use it from your laptop 💻 LAPTOP
@@ -593,7 +606,11 @@ Send request **5** again.
 
 **Question 14:** what happened to your joke? Why? Think about Part 2: your fruits were still there after `app.js` stopped. How would MongoDB fix your jokes? (That's Lab 7.)
 
+**Answer:** After the API restarts, the joke added with POST is gone because jokes are stored in an in-memory array. Restarting the process resets the array to its original contents. Saving jokes in MongoDB would keep them persistent across restarts.
+
 **Question 15:** in your own words, what does pm2 do, and what does nginx do? Why do we need both?
+
+**Answer:** PM2 runs and manages the Node.js API, keeping it alive and restarting it if it crashes. nginx handles incoming web requests and routes API requests to the app. We need both so the app stays running and people can reach it through the server.
 
 ## Changed your code?
 
